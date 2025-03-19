@@ -5,20 +5,6 @@ import matplotlib.pyplot as plt
 
 #Dataset is from: https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data
 
-def load_data():
-
-    df = pd.read_csv('data.csv')
-    
-    df = df.drop(['id', 'Unnamed: 32'], axis=1)
-    
-    # Converting diagnosis to binary (M=1, B=0)
-    df['diagnosis'] = df['diagnosis'].map({'M': 1, 'B': 0})
-    
-
-    X = df.drop('diagnosis', axis=1).values
-    y = df['diagnosis'].values
-    
-    return X, y
 
 def sigmoid(z):
     """Compute sigmoid function"""

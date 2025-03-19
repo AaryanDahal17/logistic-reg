@@ -78,7 +78,9 @@ def plot_confusion_matrix(y_true, y_pred):
     
     plt.show()
 
-def main():
+
+
+def start_logistic_regression():
     print("Loading data...")
     X, y = load_data('data.csv')
     
@@ -106,5 +108,8 @@ def main():
     plot_cost_history(costs)
     plot_confusion_matrix(y_test, y_pred_test)
 
+
+
+
 if __name__ == "__main__":
-    main() 
+    start_logistic_regression()
