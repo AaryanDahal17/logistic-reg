@@ -59,7 +59,7 @@ def train_logistic_regression(X, y, learning_rate=0.01, num_iterations=1000):
         
         if i % 100 == 0:
             costs.append(cost)
-            print(f"Iteration {i}: Cost = {cost:.4f}")
+            # print(f"Iteration {i}: Cost = {cost:.4f}")
     
     return w, b, costs
 

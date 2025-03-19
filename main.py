@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from logistics_reg import train_logistic_regression, predict
+from logistics_reg import train_logistic_regression, predict,compute_cost,compute_gradient
 
 def load_data(filepath):
     df = pd.read_csv(filepath)
@@ -78,7 +78,24 @@ def plot_confusion_matrix(y_true, y_pred):
     
     plt.show()
 
-
+def plot_learning_rate_comparison(X, y, learning_rates=[0.001, 0.01,0.5, 1.0,50,100]):
+    plt.figure(figsize=(12, 8))
+    colors = ['blue', 'red', 'green', 'purple', 'orange','black']
+    
+    for lr, color in zip(learning_rates, colors):
+        # Train model with different learning rates
+        _, _, costs = train_logistic_regression(X, y, learning_rate=lr, num_iterations=1000)
+        
+        # Plot cost history
+        iterations = range(0, 1000, 100)  # Since we store cost every 100 iterations
+        plt.plot(iterations, costs, color=color, label=f'Learning Rate = {lr}')
+    
+    plt.title('Cost History for Different Learning Rates')
+    plt.xlabel('Iterations')
+    plt.ylabel('Cost')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
 
 def start_logistic_regression():
     print("Loading data...")
@@ -87,6 +104,8 @@ def start_logistic_regression():
     X_train, X_test, y_train, y_test = train_test_split(X, y)
     
     X_train_scaled, X_test_scaled = standardize_features(X_train, X_test)
+    
+    plot_learning_rate_comparison(X_train_scaled, y_train)
     
     print("\nTraining logistic regression...")
     w, b, costs = train_logistic_regression(X_train_scaled, y_train)
